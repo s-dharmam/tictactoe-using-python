@@ -1,3 +1,8 @@
+# | 1 | 2 | 3 |
+# | 4 | 5 | 6 |
+# | 7 | 8 | 9 |
+# inputs in tic tac toe
+# two players respectively 1 and 0
 arr = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
 
 
@@ -5,16 +10,21 @@ def show(arr):
     for x in arr:
         for y in x:
             if y == -1:
-                print("a", end="  ")
+                print("-", end="  ")
             else:
                 print(y, end="  ")
         print("\n")
     return
 
 
-def update(x, y, player):
-    arr[y-1][x-1] = player
+def update(x, player):
 
+    if x < 4:
+        arr[0][x-1] = player
+    elif x < 7:
+        arr[1][x-4] = player
+    elif x < 10:
+        arr[2][x-7] = player
 
 #input(1, 2, 1)
 
@@ -47,11 +57,10 @@ turns = 0
 while (winner == -1 and turns < 9):
     player = turns % 2
     print("turn of player no:", player)
-    print("enter value of x")
+    print("enter value: ")
     x = int(input())
-    print("enter value of y")
-    y = int(input())
-    update(x, y, player)
+
+    update(x, player)
     winner = check()
     turns += 1
     show(arr)
